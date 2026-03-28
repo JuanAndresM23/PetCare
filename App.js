@@ -5,8 +5,9 @@ import AppNavigator from './src/navigation/AppNavigator';
 const App = () => {
 // Aquí vive la lista inicial
   const [pets, setPets] = useState([
-    { id: '1', name: 'Luna', species: 'Perro', breed: 'Labrador', age: '3', weight: '25' },
-    { id: '2', name: 'Michi', species: 'Gato', breed: 'Siamés', age: '2', weight: '4' },
+    { id: '1', name: 'Lupe', species: 'Perro', breed: 'chandoso', age: '7', weight: '23' },
+    { id: '2', name: 'Zoro', species: 'Gato', breed: 'Criollo', age: '3', weight: '4' },
+    { id: '3', name: 'Nyx', species: 'Gato', breed: 'NO SE SABE', age: '5', weight: '9' },
   ]);
 
   // Función para agregar una nueva mascota

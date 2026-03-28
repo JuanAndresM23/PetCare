@@ -1,76 +1,59 @@
 import { StyleSheet } from 'react-native';
 
-const styles = StyleSheet.create({
+export default StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
-    padding: 16,
+    backgroundColor: '#F1F2F6',
+    justifyContent: 'center',
+    padding: 20,
   },
   card: {
-    backgroundColor: '#fff',
-    borderRadius: 16,
-    padding: 24,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 20,
+    padding: 25,
     alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.15,
-    shadowRadius: 6,
-    elevation: 5,
+    elevation: 8,
   },
   emoji: {
-    fontSize: 64,
-    marginBottom: 8,
+    fontSize: 80,
+    marginBottom: 10,
   },
   name: {
-    fontSize: 28,
+    fontSize: 32,
     fontWeight: 'bold',
-    color: '#333',
+    color: '#2D3436',
     marginBottom: 20,
   },
   infoRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%',
-    paddingVertical: 8,
+    paddingVertical: 10,
     borderBottomWidth: 1,
-    borderBottomColor: '#f0f0f0',
+    borderBottomColor: '#F1F2F6',
   },
   label: {
-    fontSize: 15,
-    color: '#888',
-    fontWeight: '600',
-  },
-  value: {
-    fontSize: 15,
-    color: '#333',
+    fontSize: 16,
+    color: '#636E72',
     fontWeight: '500',
   },
-  favoriteButton: {
-    marginTop: 24,
-    backgroundColor: '#fff0f0',
-    borderRadius: 10,
-    paddingVertical: 12,
-    paddingHorizontal: 32,
-    borderWidth: 1,
-    borderColor: '#ffcccc',
-  },
-  favoriteButtonText: {
+  value: {
     fontSize: 16,
-    color: '#e05c5c',
+    color: '#2D3436',
     fontWeight: 'bold',
   },
-  backButton: {
-    marginTop: 12,
+  favoriteButton: {
+    marginTop: 30,
+    backgroundColor: '#FFEAA7',
     paddingVertical: 12,
-    paddingHorizontal: 32,
-    backgroundColor: '#e8e8e8',
-    borderRadius: 10,
+    paddingHorizontal: 30,
+    borderRadius: 25,
+  },
+  backButton: {
+    marginTop: 15,
   },
   backButtonText: {
-    fontSize: 15,
-    color: '#555',
-    fontWeight: '600',
+    color: '#0984E3',
+    fontSize: 16,
   },
 });
-
-export default styles;

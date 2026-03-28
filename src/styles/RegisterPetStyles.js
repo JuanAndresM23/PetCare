@@ -1,68 +1,153 @@
 import { StyleSheet } from 'react-native';
 
-const styles = StyleSheet.create({
+export default StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#F8F9FA', // Mismo fondo suave que el listado
   },
+  // --- ESTILOS DE LA CABECERA ---
+  header: {
+    paddingHorizontal: 20,
+    paddingTop: 30,
+    paddingBottom: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: '#FFFFFF',
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+    elevation: 3,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 3,
+  },
+  headerTitle: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#2D3436',
+  },
+  headerSubtitle: {
+    fontSize: 14,
+    color: '#636E72',
+    marginTop: 2,
+  },
+  headerIconContainer: {
+    backgroundColor: '#E8F5E9', // Verde muy pálido
+    padding: 12,
+    borderRadius: 50,
+  },
+  // --- ESTILOS DEL FORMULARIO ---
   keyboardView: {
     flex: 1,
   },
   scrollContent: {
-    padding: 20,
-    paddingBottom: 40,
+    paddingHorizontal: 20,
+    paddingBottom: 30,
+    paddingTop: 10,
   },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginBottom: 24,
-    color: '#333',
+  section: {
+    marginBottom: 20,
+    backgroundColor: '#FFFFFF',
+    padding: 15,
+    borderRadius: 15,
+    elevation: 2,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 2,
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: '#2D3436',
+    marginBottom: 15,
+    borderBottomWidth: 1,
+    borderBottomColor: '#F1F2F6',
+    paddingBottom: 5,
   },
   label: {
     fontSize: 14,
     fontWeight: '600',
-    color: '#555',
-    marginBottom: 6,
-    marginTop: 12,
+    color: '#636E72',
+    marginBottom: 8,
+    marginLeft: 4,
+  },
+  // --- ESTILOS DE LOS INPUTS CON ICONOS ---
+  inputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#F1F2F6', // Gris muy suave
+    borderRadius: 12,
+    paddingHorizontal: 12,
+    borderWidth: 1,
+    borderColor: '#DFE6E9',
+    marginBottom: 15,
+  },
+  inputContainerFocused: {
+    borderColor: '#4CAF50', // Borde verde al enfocar
+    backgroundColor: '#FFFFFF',
+    elevation: 2,
+  },
+  inputIcon: {
+    marginRight: 10,
   },
   input: {
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    paddingHorizontal: 14,
+    flex: 1, // Ocupa el resto del ancho
     paddingVertical: 12,
-    fontSize: 15,
-    color: '#333',
-    borderWidth: 1,
-    borderColor: '#ddd',
+    fontSize: 16,
+    color: '#2D3436',
   },
-  registerButton: {
-    backgroundColor: '#4CAF50',
-    borderRadius: 10,
-    paddingVertical: 14,
+  // --- ESTILOS DE DISEÑO EN FILAS ---
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: 28,
+  },
+  flex1: {
+    flex: 1,
+  },
+  width15: {
+    width: 15, // Espacio entre columnas
+  },
+  // --- ESTILOS DE LOS BOTONES ---
+  registerButton: {
+    backgroundColor: '#4CAF50', // Verde vibrante
+    borderRadius: 12,
+    paddingVertical: 16,
+    flexDirection: 'row', // Icono + Texto
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 10,
+    elevation: 4,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
   },
   disabledButton: {
-    backgroundColor: '#aaa',
+    backgroundColor: '#A29BFE', // Color pastel cuando no es válido
+    elevation: 0,
+    shadowOpacity: 0,
   },
   registerButtonText: {
-    color: '#fff',
-    fontSize: 16,
+    color: '#FFFFFF',
+    fontSize: 18,
     fontWeight: 'bold',
   },
+  buttonIcon: {
+    marginRight: 8,
+  },
   clearButton: {
-    backgroundColor: '#e8e8e8',
-    borderRadius: 10,
-    paddingVertical: 14,
+    padding: 15,
     alignItems: 'center',
-    marginTop: 12,
+    marginTop: 10,
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
   clearButtonText: {
-    color: '#555',
+    color: '#FF7675', // Rojo suave
     fontSize: 16,
     fontWeight: '600',
   },
 });
-
-export default styles;
