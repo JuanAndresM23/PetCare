@@ -1,4 +1,4 @@
-// External dependencies
+// Dependencias externas
 import React, { useState, useEffect } from 'react';
 import {
   View,
@@ -14,19 +14,25 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-// Styles
+// Estilos
 import styles from '../styles/RegisterPetStyles';
 
+// Recibe la función addPet como prop desde AppNavigator
 const RegisterPetScreen = ({ addPet }) => {
   const navigation = useNavigation();
+
+  // Estado independiente para cada campo del formulario
   const [name, setName] = useState('');
   const [species, setSpecies] = useState('');
   const [breed, setBreed] = useState('');
   const [age, setAge] = useState('');
   const [weight, setWeight] = useState('');
+
+  // Estado que controla si el botón de registro está habilitado
   const [isFormValid, setIsFormValid] = useState(false);
 
-  // Validate form in real time when any field changes
+  // useEffect con dependencias: valida el formulario en tiempo real
+  // Se ejecuta cada vez que cambia cualquier campo
   useEffect(() => {
     const allFieldsFilled =
       name.trim() !== '' &&
@@ -37,22 +43,23 @@ const RegisterPetScreen = ({ addPet }) => {
     setIsFormValid(allFieldsFilled);
   }, [name, species, breed, age, weight]);
 
-  // Shows a summary alert with the registered pet data
-const handleRegister = () => {
-  addPet({ name, species, breed, age, weight });
-  Alert.alert(
-    '✅ ¡Mascota Registrada!',
-    `Nombre: ${name}\nEspecie: ${species}\nRaza: ${breed}\nEdad: ${age} años\nPeso: ${weight} kg`,
-    [
-      {
-        text: 'Aceptar',
-        onPress: () => handleClear(),
-      },
-    ]
-  );
-};
+  // Agrega la mascota a la lista y muestra un resumen con los datos ingresados
+  const handleRegister = () => {
+    addPet({ name, species, breed, age, weight });
+    Alert.alert(
+      '¡Mascota Registrada!',
+      `Nombre: ${name}\nEspecie: ${species}\nRaza: ${breed}\nEdad: ${age} años\nPeso: ${weight} kg`,
+      [
+        {
+          text: 'Aceptar',
+          // Limpia el formulario al cerrar el Alert
+          onPress: () => handleClear(),
+        },
+      ]
+    );
+  };
 
-  // Resets all form fields to their initial values
+  // Resetea todos los campos del formulario a su valor inicial
   const handleClear = () => {
     setName('');
     setSpecies('');
@@ -63,6 +70,7 @@ const handleRegister = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+      {/* Evita que el teclado tape los campos en iOS */}
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
         style={{ flex: 1 }}
@@ -72,15 +80,17 @@ const handleRegister = () => {
           showsVerticalScrollIndicator={false}
           keyboardShouldPersistTaps="handled"
         >
+          {/* Cabecera de la pantalla */}
           <View style={styles.header}>
             <Text style={styles.headerTitle}>Nueva Mascota</Text>
             <Text style={styles.headerSubtitle}>Completa los datos para el registro</Text>
           </View>
 
-          {/* Basic data section */}
+          {/* Sección de datos básicos */}
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Datos Básicos</Text>
 
+            {/* Campo: nombre de la mascota */}
             <Text style={styles.label}>Nombre de la Mascota</Text>
             <View style={styles.inputContainer}>
               <Icon name="paw-outline" size={20} color="#B2BEC3" style={styles.inputIcon} />
@@ -93,8 +103,10 @@ const handleRegister = () => {
               />
             </View>
 
+            {/* Campos en fila: especie y raza */}
             <View style={styles.row}>
               <View style={styles.flex1}>
+                {/* Campo: especie */}
                 <Text style={styles.label}>Especie</Text>
                 <View style={styles.inputContainer}>
                   <Icon name="help-circle-outline" size={20} color="#B2BEC3" style={styles.inputIcon} />
@@ -109,6 +121,7 @@ const handleRegister = () => {
               </View>
               <View style={styles.width15} />
               <View style={styles.flex1}>
+                {/* Campo: raza */}
                 <Text style={styles.label}>Raza</Text>
                 <View style={styles.inputContainer}>
                   <Icon name="git-branch-outline" size={20} color="#B2BEC3" style={styles.inputIcon} />
@@ -124,12 +137,14 @@ const handleRegister = () => {
             </View>
           </View>
 
-          {/* Physical data section */}
+          {/* Sección de datos físicos */}
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Datos Físicos</Text>
 
+            {/* Campos en fila: edad y peso */}
             <View style={styles.row}>
               <View style={styles.flex1}>
+                {/* Campo: edad */}
                 <Text style={styles.label}>Edad (años)</Text>
                 <View style={styles.inputContainer}>
                   <Icon name="calendar-outline" size={20} color="#B2BEC3" style={styles.inputIcon} />
@@ -145,6 +160,7 @@ const handleRegister = () => {
               </View>
               <View style={styles.width15} />
               <View style={styles.flex1}>
+                {/* Campo: peso */}
                 <Text style={styles.label}>Peso (kg)</Text>
                 <View style={styles.inputContainer}>
                   <Icon name="barbell-outline" size={20} color="#B2BEC3" style={styles.inputIcon} />
@@ -161,7 +177,7 @@ const handleRegister = () => {
             </View>
           </View>
 
-          {/* Action buttons */}
+          {/* Botón de registro — deshabilitado si el formulario no es válido */}
           <TouchableOpacity
             style={[styles.registerButton, !isFormValid && styles.disabledButton]}
             onPress={handleRegister}
@@ -171,6 +187,7 @@ const handleRegister = () => {
             <Text style={styles.registerButtonText}>Registrar Mascota</Text>
           </TouchableOpacity>
 
+          {/* Botón para limpiar todos los campos del formulario */}
           <TouchableOpacity style={styles.clearButton} onPress={handleClear}>
             <Icon name="trash-outline" size={18} color="#FF7675" style={styles.buttonIcon} />
             <Text style={styles.clearButtonText}>Limpiar Formulario</Text>

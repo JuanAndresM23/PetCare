@@ -1,15 +1,16 @@
-// External dependencies
+// Dependencias externas
 import React, { useState, useEffect } from 'react';
 import { SafeAreaView, FlatList, Text, TouchableOpacity, View } from 'react-native';
 
-// Navigation
+// Navegación
 import { useNavigation } from '@react-navigation/native';
 
-// Styles
+// Estilos
 import styles from '../styles/PetListStyles';
 
-// Returns an emoji based on the pet species
+// Retorna un emoji según la especie de la mascota
 const getSpeciesEmoji = (species) => {
+  // Normaliza el texto a minúsculas para evitar errores de capitalización
   const normalized = species?.trim().toLowerCase();
   const emojis = {
     perro: '🐶',
@@ -25,32 +26,33 @@ const getSpeciesEmoji = (species) => {
     serpiente: '🐍',
     caballo: '🐴',
   };
+  // Retorna el emoji correspondiente o una huella si no se reconoce la especie
   return emojis[normalized] || '🐾';
 };
 
-// Receives pets list as prop from AppNavigator
+// Recibe la lista de mascotas como prop desde AppNavigator
 const PetListScreen = ({ pets: propPets }) => {
   const navigation = useNavigation();
 
-  // useState: manages the pets array as local state
+  // useState: maneja el arreglo de mascotas como estado local
   const [pets, setPets] = useState([]);
 
-  // useEffect with empty array: loads initial data when component mounts
+  // useEffect con array vacío: carga los datos iniciales al montar el componente
   useEffect(() => {
     setPets(propPets);
   }, []);
 
-  // useEffect with dependency: updates list when propPets changes (new pet registered)
+  // useEffect con dependencia: actualiza la lista cuando se registra una nueva mascota
   useEffect(() => {
     setPets(propPets);
   }, [propPets]);
 
-  // Navigates to PetDetail passing the full pet object
+  // Navega a PetDetail enviando el objeto completo de la mascota
   const handlePetPress = (pet) => {
     navigation.navigate('PetDetail', { pet });
   };
 
-  // Renders a single pet card
+  // Renderiza una tarjeta individual por cada mascota
   const renderPetCard = ({ item }) => (
     <TouchableOpacity
       style={styles.card}
@@ -66,7 +68,7 @@ const PetListScreen = ({ pets: propPets }) => {
     </TouchableOpacity>
   );
 
-  // Empty state when no pets are registered
+  // Renderiza el estado vacío cuando no hay mascotas registradas
   const renderEmptyState = () => (
     <View style={styles.emptyContainer}>
       <Text style={styles.emptyEmoji}>🐾</Text>
@@ -78,6 +80,7 @@ const PetListScreen = ({ pets: propPets }) => {
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Mis Mascotas</Text>
+      {/* Lista de mascotas con estado vacío integrado */}
       <FlatList
         data={pets}
         keyExtractor={(item) => item.id}
