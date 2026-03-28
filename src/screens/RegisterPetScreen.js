@@ -1,8 +1,6 @@
-// External dependencies
 import React, { useState, useEffect } from 'react';
 import {
   SafeAreaView,
-  View,
   Text,
   TextInput,
   TouchableOpacity,
@@ -11,11 +9,12 @@ import {
   Platform,
   ScrollView,
 } from 'react-native';
-
-// Styles
+import { useNavigation } from '@react-navigation/native';
 import styles from '../styles/RegisterPetStyles';
 
-const RegisterPetScreen = () => {
+// RECIBIMOS addPet COMO PROP
+const RegisterPetScreen = ({ addPet }) => {
+  const navigation = useNavigation();
   const [name, setName] = useState('');
   const [species, setSpecies] = useState('');
   const [breed, setBreed] = useState('');
@@ -23,7 +22,6 @@ const RegisterPetScreen = () => {
   const [weight, setWeight] = useState('');
   const [isFormValid, setIsFormValid] = useState(false);
 
-  // Validate form in real time when any field changes
   useEffect(() => {
     const allFieldsFilled =
       name.trim() !== '' &&
@@ -34,16 +32,29 @@ const RegisterPetScreen = () => {
     setIsFormValid(allFieldsFilled);
   }, [name, species, breed, age, weight]);
 
-  // Shows a summary alert with the registered pet data
   const handleRegister = () => {
+    // 1. Creamos el objeto con la nueva mascota
+    const newPet = { name, species, breed, age, weight };
+    
+    // 2. Ejecutamos la función que viene desde App.js
+    addPet(newPet);
+
+    // 3. Mostramos éxito y navegamos
     Alert.alert(
       '✅ Mascota Registrada',
-      `Nombre: ${name}\nEspecie: ${species}\nRaza: ${breed}\nEdad: ${age} años\nPeso: ${weight} kg`,
-      [{ text: 'Aceptar' }]
+      `¡${name} ha sido agregado a la lista!`,
+      [
+        { 
+          text: 'Ir a la lista', 
+          onPress: () => {
+            handleClear();
+            navigation.navigate('Mascotas'); // Salta a la pestaña de la lista
+          } 
+        }
+      ]
     );
   };
 
-  // Resets all form fields to their initial values
   const handleClear = () => {
     setName('');
     setSpecies('');
@@ -59,7 +70,6 @@ const RegisterPetScreen = () => {
         style={styles.keyboardView}
       >
         <ScrollView contentContainerStyle={styles.scrollContent}>
-
           <Text style={styles.title}>Registrar Mascota</Text>
 
           <Text style={styles.label}>Nombre</Text>
@@ -73,7 +83,7 @@ const RegisterPetScreen = () => {
           <Text style={styles.label}>Especie</Text>
           <TextInput
             style={styles.input}
-            placeholder="Ej: Perro, Gato, Pájaro"
+            placeholder="Ej: Perro, Gato"
             value={species}
             onChangeText={setSpecies}
           />
@@ -112,13 +122,9 @@ const RegisterPetScreen = () => {
             <Text style={styles.registerButtonText}>Registrar</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity
-            style={styles.clearButton}
-            onPress={handleClear}
-          >
+          <TouchableOpacity style={styles.clearButton} onPress={handleClear}>
             <Text style={styles.clearButtonText}>Limpiar</Text>
           </TouchableOpacity>
-
         </ScrollView>
       </KeyboardAvoidingView>
     </SafeAreaView>
