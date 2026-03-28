@@ -12,7 +12,6 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
-import Icon from 'react-native-vector-icons/Ionicons';
 
 // Estilos
 import styles from '../styles/RegisterPetStyles';
@@ -93,7 +92,6 @@ const RegisterPetScreen = ({ addPet }) => {
             {/* Campo: nombre de la mascota */}
             <Text style={styles.label}>Nombre de la Mascota</Text>
             <View style={styles.inputContainer}>
-              <Icon name="paw-outline" size={20} color="#B2BEC3" style={styles.inputIcon} />
               <TextInput
                 style={styles.input}
                 placeholder="Ej: Tulio"
@@ -109,7 +107,6 @@ const RegisterPetScreen = ({ addPet }) => {
                 {/* Campo: especie */}
                 <Text style={styles.label}>Especie</Text>
                 <View style={styles.inputContainer}>
-                  <Icon name="help-circle-outline" size={20} color="#B2BEC3" style={styles.inputIcon} />
                   <TextInput
                     style={styles.input}
                     placeholder="Ej: Perro"
@@ -124,7 +121,6 @@ const RegisterPetScreen = ({ addPet }) => {
                 {/* Campo: raza */}
                 <Text style={styles.label}>Raza</Text>
                 <View style={styles.inputContainer}>
-                  <Icon name="git-branch-outline" size={20} color="#B2BEC3" style={styles.inputIcon} />
                   <TextInput
                     style={styles.input}
                     placeholder="Ej: Labrador"
@@ -147,7 +143,6 @@ const RegisterPetScreen = ({ addPet }) => {
                 {/* Campo: edad */}
                 <Text style={styles.label}>Edad (años)</Text>
                 <View style={styles.inputContainer}>
-                  <Icon name="calendar-outline" size={20} color="#B2BEC3" style={styles.inputIcon} />
                   <TextInput
                     style={styles.input}
                     placeholder="Ej: 3"
@@ -163,7 +158,6 @@ const RegisterPetScreen = ({ addPet }) => {
                 {/* Campo: peso */}
                 <Text style={styles.label}>Peso (kg)</Text>
                 <View style={styles.inputContainer}>
-                  <Icon name="barbell-outline" size={20} color="#B2BEC3" style={styles.inputIcon} />
                   <TextInput
                     style={styles.input}
                     placeholder="Ej: 25"
@@ -183,13 +177,11 @@ const RegisterPetScreen = ({ addPet }) => {
             onPress={handleRegister}
             disabled={!isFormValid}
           >
-            <Icon name="save-outline" size={20} color="#FFFFFF" style={styles.buttonIcon} />
             <Text style={styles.registerButtonText}>Registrar Mascota</Text>
           </TouchableOpacity>
 
           {/* Botón para limpiar todos los campos del formulario */}
           <TouchableOpacity style={styles.clearButton} onPress={handleClear}>
-            <Icon name="trash-outline" size={18} color="#FF7675" style={styles.buttonIcon} />
             <Text style={styles.clearButtonText}>Limpiar Formulario</Text>
           </TouchableOpacity>
 

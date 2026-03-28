@@ -1,6 +1,7 @@
 // Dependencias externas
 import React, { useState, useEffect } from 'react';
-import { SafeAreaView, FlatList, Text, TouchableOpacity, View } from 'react-native';
+import { FlatList, Text, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 // Navegación
 import { useNavigation } from '@react-navigation/native';

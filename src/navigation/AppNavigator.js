@@ -19,7 +19,7 @@ const PetsStack = ({ pets }) => {
   return (
     <Stack.Navigator>
       {/* Pantalla principal de la lista de mascotas */}
-      <Stack.Screen name="PetList" options={{ title: 'Mis Mascotas' }}>
+      <Stack.Screen name="PetList" options={{ title: 'PetCare' }}>
         {(props) => <PetListScreen {...props} pets={pets} />}
       </Stack.Screen>
       {/* Pantalla de detalle de una mascota seleccionada */}
