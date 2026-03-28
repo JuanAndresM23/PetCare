@@ -1,114 +1,75 @@
 import { StyleSheet } from 'react-native';
 
-export default StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F8F9FA', // Un gris muy suave de fondo
+    backgroundColor: '#FAFAFA',
   },
-  // --- ESTILOS DE LA CABECERA ---
-  header: {
-    paddingHorizontal: 20,
-    paddingTop: 30,
-    paddingBottom: 15,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: '#FFFFFF',
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
-    elevation: 3, // Sombra suave en Android
-    shadowColor: '#000', // Sombra suave en iOS
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 3,
-  },
-  greeting: {
-    fontSize: 18,
-    color: '#636E72',
-    fontWeight: '400',
-  },
-  welcomeTitle: {
+  title: {
     fontSize: 28,
-    fontWeight: 'bold',
-    color: '#2D3436',
-    marginTop: 2,
-  },
-  headerIconContainer: {
-    backgroundColor: '#E8F5E9', // Verde muy pálido de fondo
-    padding: 10,
-    borderRadius: 50,
-  },
-  headerEmoji: {
-    fontSize: 30,
-  },
-  // --- ESTILOS DEL RESUMEN ---
-  summaryContainer: {
+    fontWeight: '700',
+    color: '#1A1A1A',
     paddingHorizontal: 20,
-    marginVertical: 15,
+    paddingTop: 16,
+    paddingBottom: 12,
   },
-  summaryCard: {
-    backgroundColor: '#4CAF50', // Verde vibrante
-    paddingVertical: 12,
+  list: {
     paddingHorizontal: 20,
-    borderRadius: 12,
-    flexDirection: 'row',
-    alignItems: 'center',
-    elevation: 2,
-  },
-  summaryCount: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#FFFFFF',
-    marginRight: 10,
-  },
-  summaryLabel: {
-    fontSize: 16,
-    color: '#FFFFFF',
-    opacity: 0.9,
-  },
-  // --- ESTILOS DE LA LISTA ---
-  listContent: {
-    paddingHorizontal: 20,
-    paddingBottom: 20,
+    paddingBottom: 24,
   },
   card: {
     backgroundColor: '#FFFFFF',
-    borderRadius: 15,
-    padding: 15,
-    marginBottom: 12,
+    borderRadius: 12,
+    paddingVertical: 16,
+    paddingHorizontal: 18,
+    marginBottom: 10,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between', // Separa el info del icono de flecha
-    // Sombras profesionales
-    elevation: 3,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.08,
-    shadowRadius: 3,
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 4,
+    elevation: 1,
   },
   cardInfo: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    flex: 1, // Ocupa todo el espacio disponible
-  },
-  emoji: {
-    fontSize: 35,
-    marginRight: 15,
-    textAlign: 'center',
-    width: 45, // Ancho fijo para alinear textos
-  },
-  textContainer: {
-    flex: 1, // Permite que el texto se ajuste
+    flex: 1,
   },
   petName: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: '600',
-    color: '#2D3436',
+    color: '#1A1A1A',
+    marginBottom: 3,
   },
   petSpecies: {
     fontSize: 13,
-    color: '#636E72',
-    marginTop: 2,
-    textTransform: 'capitalize', // Primera letra mayúscula
+    color: '#AAA',
+  },
+  chevron: {
+    fontSize: 22,
+    color: '#DDD',
+    marginLeft: 8,
+  },
+  emptyContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 100,
+  },
+  emptyText: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#555',
+    textAlign: 'center',
+  },
+  emptySubtext: {
+    fontSize: 13,
+    color: '#BBB',
+    textAlign: 'center',
+    marginTop: 6,
+  },
+    emoji: {
+    fontSize: 28,
+    marginRight: 14,
   },
 });
+
+export default styles;

@@ -6,31 +6,20 @@ export default StyleSheet.create({
     backgroundColor: '#F8F9FA', // Mismo fondo suave que el listado
   },
   // --- ESTILOS DE LA CABECERA ---
-  header: {
+ header: {
     paddingHorizontal: 20,
-    paddingTop: 30,
-    paddingBottom: 20,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: '#FFFFFF',
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
-    elevation: 3,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 3,
+    paddingTop: 20,
+    paddingBottom: 16,
   },
   headerTitle: {
     fontSize: 28,
-    fontWeight: 'bold',
-    color: '#2D3436',
+    fontWeight: '700',
+    color: '#1A1A1A',
   },
   headerSubtitle: {
     fontSize: 14,
-    color: '#636E72',
-    marginTop: 2,
+    color: '#AAA',
+    marginTop: 4,
   },
   headerIconContainer: {
     backgroundColor: '#E8F5E9', // Verde muy pálido

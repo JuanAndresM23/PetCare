@@ -1,21 +1,22 @@
 // External dependencies
 import React, { useState, useEffect } from 'react';
-import { 
-  View, 
-  Text, 
-  TextInput, 
-  TouchableOpacity, 
-  Alert, 
-  KeyboardAvoidingView, 
-  Platform, 
-  ScrollView 
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  Alert,
+  ScrollView,
+  KeyboardAvoidingView,
+  Platform,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
-import Icon from 'react-native-vector-icons/Ionicons'; // Importamos iconos
+import Icon from 'react-native-vector-icons/Ionicons';
+
+// Styles
 import styles from '../styles/RegisterPetStyles';
 
-// RECIBIMOS addPet COMO PROP
 const RegisterPetScreen = ({ addPet }) => {
   const navigation = useNavigation();
   const [name, setName] = useState('');
@@ -25,9 +26,7 @@ const RegisterPetScreen = ({ addPet }) => {
   const [weight, setWeight] = useState('');
   const [isFormValid, setIsFormValid] = useState(false);
 
-  // Estados para saber qué input está enfocado (para el estilo)
-  const [focusedInput, setFocusedInput] = useState(null);
-
+  // Validate form in real time when any field changes
   useEffect(() => {
     const allFieldsFilled =
       name.trim() !== '' &&
@@ -38,25 +37,22 @@ const RegisterPetScreen = ({ addPet }) => {
     setIsFormValid(allFieldsFilled);
   }, [name, species, breed, age, weight]);
 
-  const handleRegister = () => {
-    const newPet = { name, species, breed, age, weight };
-    addPet(newPet);
+  // Shows a summary alert with the registered pet data
+const handleRegister = () => {
+  addPet({ name, species, breed, age, weight });
+  Alert.alert(
+    '✅ ¡Mascota Registrada!',
+    `Nombre: ${name}\nEspecie: ${species}\nRaza: ${breed}\nEdad: ${age} años\nPeso: ${weight} kg`,
+    [
+      {
+        text: 'Aceptar',
+        onPress: () => handleClear(),
+      },
+    ]
+  );
+};
 
-    Alert.alert(
-      '✅ ¡Mascota Registrada!',
-      `${name} ya es parte de la familia PetCare.`,
-      [
-        { 
-          text: 'Ver en la lista', 
-          onPress: () => {
-            handleClear();
-            navigation.navigate('Mascotas');
-          } 
-        }
-      ]
-    );
-  };
-
+  // Resets all form fields to their initial values
   const handleClear = () => {
     setName('');
     setSpecies('');
@@ -65,81 +61,107 @@ const RegisterPetScreen = ({ addPet }) => {
     setWeight('');
   };
 
-  // Función auxiliar para renderizar los inputs con estilo de foco
-  const renderInput = (placeholder, value, onChangeText, iconName, keyboardType = 'default', inputKey) => (
-    <View style={[styles.inputContainer, focusedInput === inputKey && styles.inputContainerFocused]}>
-      <Icon name={iconName} size={20} color={focusedInput === inputKey ? '#4CAF50' : '#B2BEC3'} style={styles.inputIcon} />
-      <TextInput
-        style={styles.input}
-        placeholder={placeholder}
-        placeholderTextColor="#B2BEC3"
-        value={value}
-        onChangeText={onChangeText}
-        keyboardType={keyboardType}
-        onFocus={() => setFocusedInput(inputKey)}
-        onBlur={() => setFocusedInput(null)}
-      />
-    </View>
-  );
-
   return (
     <SafeAreaView style={styles.container}>
-      {/* === NUEVA CABECERA DE REGISTRO === */}
-      <View style={styles.header}>
-        <View style={styles.headerTitleContainer}>
-          <Text style={styles.headerTitle}>Nueva Mascota</Text>
-          <Text style={styles.headerSubtitle}>Completa los datos para el registro</Text>
-        </View>
-        <View style={styles.headerIconContainer}>
-          <Icon name="add-circle" size={35} color="#4CAF50" />
-        </View>
-      </View>
-
       <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        style={styles.keyboardView}
-        keyboardVerticalOffset={Platform.OS === 'ios' ? 100 : 0} // Ajuste para el header
+        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+        style={{ flex: 1 }}
       >
-        <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
-          
-          {/* === SECCIÓN 1: DATOS BÁSICOS === */}
+        <ScrollView
+          contentContainerStyle={styles.scrollContent}
+          showsVerticalScrollIndicator={false}
+          keyboardShouldPersistTaps="handled"
+        >
+          <View style={styles.header}>
+            <Text style={styles.headerTitle}>Nueva Mascota</Text>
+            <Text style={styles.headerSubtitle}>Completa los datos para el registro</Text>
+          </View>
+
+          {/* Basic data section */}
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Datos Básicos</Text>
-            
+
             <Text style={styles.label}>Nombre de la Mascota</Text>
-            {renderInput("Ej: Luna, Fido...", name, setName, "paw-outline", "default", "name")}
+            <View style={styles.inputContainer}>
+              <Icon name="paw-outline" size={20} color="#B2BEC3" style={styles.inputIcon} />
+              <TextInput
+                style={styles.input}
+                placeholder="Ej: Tulio"
+                placeholderTextColor="#B2BEC3"
+                value={name}
+                onChangeText={setName}
+              />
+            </View>
 
             <View style={styles.row}>
               <View style={styles.flex1}>
                 <Text style={styles.label}>Especie</Text>
-                {renderInput("Ej: Perro", species, setSpecies, "help-circle-outline", "default", "species")}
+                <View style={styles.inputContainer}>
+                  <Icon name="help-circle-outline" size={20} color="#B2BEC3" style={styles.inputIcon} />
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Ej: Perro"
+                    placeholderTextColor="#B2BEC3"
+                    value={species}
+                    onChangeText={setSpecies}
+                  />
+                </View>
               </View>
               <View style={styles.width15} />
               <View style={styles.flex1}>
                 <Text style={styles.label}>Raza</Text>
-                {renderInput("Ej: Labrador", breed, setBreed, "git-branch-outline", "default", "breed")}
+                <View style={styles.inputContainer}>
+                  <Icon name="git-branch-outline" size={20} color="#B2BEC3" style={styles.inputIcon} />
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Ej: Labrador"
+                    placeholderTextColor="#B2BEC3"
+                    value={breed}
+                    onChangeText={setBreed}
+                  />
+                </View>
               </View>
             </View>
           </View>
 
-          {/* === SECCIÓN 2: DATOS FÍSICOS === */}
+          {/* Physical data section */}
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Datos Físicos</Text>
-            
+
             <View style={styles.row}>
               <View style={styles.flex1}>
                 <Text style={styles.label}>Edad (años)</Text>
-                {renderInput("Ej: 3", age, setAge, "calendar-outline", "numeric", "age")}
+                <View style={styles.inputContainer}>
+                  <Icon name="calendar-outline" size={20} color="#B2BEC3" style={styles.inputIcon} />
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Ej: 3"
+                    placeholderTextColor="#B2BEC3"
+                    value={age}
+                    onChangeText={setAge}
+                    keyboardType="numeric"
+                  />
+                </View>
               </View>
               <View style={styles.width15} />
               <View style={styles.flex1}>
                 <Text style={styles.label}>Peso (kg)</Text>
-                {renderInput("Ej: 25", weight, setWeight, "barbell-outline", "numeric", "weight")}
+                <View style={styles.inputContainer}>
+                  <Icon name="barbell-outline" size={20} color="#B2BEC3" style={styles.inputIcon} />
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Ej: 25"
+                    placeholderTextColor="#B2BEC3"
+                    value={weight}
+                    onChangeText={setWeight}
+                    keyboardType="numeric"
+                  />
+                </View>
               </View>
             </View>
           </View>
 
-          {/* === BOTONES === */}
+          {/* Action buttons */}
           <TouchableOpacity
             style={[styles.registerButton, !isFormValid && styles.disabledButton]}
             onPress={handleRegister}

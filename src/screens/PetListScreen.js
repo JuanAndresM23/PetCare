@@ -1,70 +1,89 @@
 // External dependencies
-import React from 'react';
-// 1. Cambiamos la procedencia de SafeAreaView para quitar el warning amarillo
-import { FlatList, Text, TouchableOpacity, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context'; 
+import React, { useState, useEffect } from 'react';
+import { SafeAreaView, FlatList, Text, TouchableOpacity, View } from 'react-native';
 
-// Navigation y otros
+// Navigation
 import { useNavigation } from '@react-navigation/native';
-import Icon from 'react-native-vector-icons/Ionicons';
+
+// Styles
 import styles from '../styles/PetListStyles';
 
+// Returns an emoji based on the pet species
 const getSpeciesEmoji = (species) => {
+  const normalized = species?.trim().toLowerCase();
   const emojis = {
-    Perro: '🐶',
-    Gato: '🐱',
-    Pájaro: '🐦',
-    Pez: '🐟',
+    perro: '🐶',
+    gato: '🐱',
+    pajaro: '🐦',
+    pájaro: '🐦',
+    ave: '🐦',
+    pez: '🐟',
+    conejo: '🐰',
+    hamster: '🐹',
+    hámster: '🐹',
+    tortuga: '🐢',
+    serpiente: '🐍',
+    caballo: '🐴',
   };
-  return emojis[species] || '🐾';
+  return emojis[normalized] || '🐾';
 };
 
-const PetListScreen = ({ pets }) => {
+// Receives pets list as prop from AppNavigator
+const PetListScreen = ({ pets: propPets }) => {
   const navigation = useNavigation();
 
+  // useState: manages the pets array as local state
+  const [pets, setPets] = useState([]);
+
+  // useEffect with empty array: loads initial data when component mounts
+  useEffect(() => {
+    setPets(propPets);
+  }, []);
+
+  // useEffect with dependency: updates list when propPets changes (new pet registered)
+  useEffect(() => {
+    setPets(propPets);
+  }, [propPets]);
+
+  // Navigates to PetDetail passing the full pet object
   const handlePetPress = (pet) => {
     navigation.navigate('PetDetail', { pet });
   };
 
+  // Renders a single pet card
   const renderPetCard = ({ item }) => (
-    <TouchableOpacity style={styles.card} onPress={() => handlePetPress(item)}>
+    <TouchableOpacity
+      style={styles.card}
+      onPress={() => handlePetPress(item)}
+      activeOpacity={0.7}
+    >
+      <Text style={styles.emoji}>{getSpeciesEmoji(item.species)}</Text>
       <View style={styles.cardInfo}>
-        <Text style={styles.emoji}>{getSpeciesEmoji(item.species)}</Text>
-        <View style={styles.textContainer}>
-          <Text style={styles.petName}>{item.name}</Text>
-          <Text style={styles.petSpecies}>{item.species} • {item.breed}</Text>
-        </View>
+        <Text style={styles.petName}>{item.name}</Text>
+        <Text style={styles.petSpecies}>{item.species} · {item.breed}</Text>
       </View>
-      <Icon name="chevron-forward-outline" size={20} color="#B2BEC3" />
+      <Text style={styles.chevron}>›</Text>
     </TouchableOpacity>
   );
 
+  // Empty state when no pets are registered
+  const renderEmptyState = () => (
+    <View style={styles.emptyContainer}>
+      <Text style={styles.emptyEmoji}>🐾</Text>
+      <Text style={styles.emptyText}>Aún no tienes mascotas registradas</Text>
+      <Text style={styles.emptySubtext}>Ve a la pestaña "Registrar" para agregar una</Text>
+    </View>
+  );
+
   return (
-    // SafeAreaView ahora viene de react-native-safe-area-context
-    <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
-      <View style={styles.header}>
-        <View>
-          <Text style={styles.greeting}>Hola,</Text>
-          <Text style={styles.welcomeTitle}>Tus Mascotas</Text>
-        </View>
-        <View style={styles.headerIconContainer}>
-          <Text style={styles.headerEmoji}>🐾</Text>
-        </View>
-      </View>
-
-      <View style={styles.summaryContainer}>
-        <View style={styles.summaryCard}>
-          <Text style={styles.summaryCount}>{pets.length}</Text>
-          <Text style={styles.summaryLabel}>Registradas</Text>
-        </View>
-      </View>
-
+    <SafeAreaView style={styles.container}>
+      <Text style={styles.title}>Mis Mascotas</Text>
       <FlatList
         data={pets}
-        // 2. Corregimos el error de las Keys duplicadas asegurando que sea un String único
-        keyExtractor={(item, index) => item.id ? item.id.toString() : index.toString()}
+        keyExtractor={(item) => item.id}
         renderItem={renderPetCard}
-        contentContainerStyle={styles.listContent}
+        contentContainerStyle={styles.list}
+        ListEmptyComponent={renderEmptyState}
         showsVerticalScrollIndicator={false}
       />
     </SafeAreaView>

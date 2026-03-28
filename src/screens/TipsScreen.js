@@ -1,5 +1,7 @@
+// External dependencies
 import React, { useState, useEffect } from 'react';
-import { SafeAreaView, View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { CARE_TIPS } from '../data/tipsData';
 import styles from '../styles/TipsStyles';
 
@@ -11,10 +13,14 @@ const TipsScreen = () => {
   useEffect(() => {
     const intervalId = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % tips.length);
-    }, 5000); // 5 seconds rotation 
+    }, 5000);
+    return () => clearInterval(intervalId);
+  }, []);
 
-    return () => clearInterval(intervalId); // Cleanup function [cite: 219]
-  }, [tips.length]);
+   // Updates info message every time the current tip changes
+  useEffect(() => {
+    console.log(`Now showing tip ${currentIndex + 1} of ${tips.length}`);
+  }, [currentIndex]);
 
   const handleNext = () => {
     setCurrentIndex((prev) => (prev + 1) % tips.length);

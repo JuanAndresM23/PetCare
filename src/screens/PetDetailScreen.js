@@ -1,18 +1,13 @@
-// External dependencies
 import React, { useState, useEffect } from 'react';
-import { SafeAreaView, View, Text, TouchableOpacity } from 'react-native';
-
-// Navigation
+import { View, Text, TouchableOpacity } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation, useRoute } from '@react-navigation/native';
-
-// Styles
 import styles from '../styles/PetDetailStyles';
 
 const PetDetailScreen = () => {
   const navigation = useNavigation();
   const route = useRoute();
 
-  // Receive and destructure pet object from params
   const { pet } = route.params;
 
   const [isFavorite, setIsFavorite] = useState(false);
@@ -80,17 +75,6 @@ const PetDetailScreen = () => {
       </View>
     </SafeAreaView>
   );
-};
-
-// Returns an emoji based on the pet species
-const getSpeciesEmoji = (species) => {
-  const emojis = {
-    Perro: '🐶',
-    Gato: '🐱',
-    Pájaro: '🐦',
-    Pez: '🐟',
-  };
-  return emojis[species] || '🐾';
 };
 
 export default PetDetailScreen;
