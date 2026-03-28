@@ -38,12 +38,14 @@ const PetListScreen = ({ pets: propPets }) => {
   // useState: maneja el arreglo de mascotas como estado local
   const [pets, setPets] = useState([]);
 
-  // useEffect con array vacío: carga los datos iniciales al montar el componente
+
+// useEffect con array vacío []: Cumple con el requisito de simular carga inicial
   useEffect(() => {
+    // Al usar [], esto solo se ejecuta una vez cuando se abre la pantalla
     setPets(propPets);
   }, []);
 
-  // useEffect con dependencia: actualiza la lista cuando se registra una nueva mascota
+  
   useEffect(() => {
     setPets(propPets);
   }, [propPets]);

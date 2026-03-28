@@ -34,6 +34,7 @@ const getSpeciesEmoji = (species) => {
 const PetDetailScreen = () => {
   const navigation = useNavigation();
   const route = useRoute();
+//agregar favoeito 
 
   // Recibe y desestructura el objeto de la mascota enviado desde PetListScreen
   const { pet } = route.params;
@@ -86,6 +87,20 @@ const PetDetailScreen = () => {
           <Text style={styles.label}>Peso:</Text>
           <Text style={styles.value}>{pet.weight} kg</Text>
         </View>
+
+        <TouchableOpacity
+          style={[styles.favoriteButton, isFavorite && styles.favoriteActive]}
+          onPress={handleFavoriteToggle}
+        >
+          <Text style={styles.favoriteButtonText}>
+            {isFavorite ? ' En Favoritos' : '☆ Agregar a Favoritos'}
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.backButton}
+          onPress={() => navigation.goBack()}
+        ></TouchableOpacity>
 
         {/* Botón para volver a la pantalla anterior */}
         <TouchableOpacity

@@ -41,6 +41,7 @@ const RegisterPetScreen = ({ addPet }) => {
       weight.trim() !== '';
     setIsFormValid(allFieldsFilled);
   }, [name, species, breed, age, weight]);
+ 
 
   // Agrega la mascota a la lista y muestra un resumen con los datos ingresados
   const handleRegister = () => {
